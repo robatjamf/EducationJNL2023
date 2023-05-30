@@ -1,0 +1,3894 @@
+{
+	"info": {
+		"_postman_id": "2dc95083-0c9d-45fd-9484-144f001f6ab5",
+		"name": "Jamf School API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23333130"
+	},
+	"item": [
+		{
+			"name": "Apps",
+			"item": [
+				{
+					"name": "Get List of Apps",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/apps",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"apps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get App Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/apps/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"apps",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "ID of the App"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Automated Device Enrolment",
+			"item": [
+				{
+					"name": "Find a ADE Device",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/dep/:serial",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"dep",
+								":serial"
+							],
+							"variable": [
+								{
+									"key": "serial",
+									"value": "{{SerialNo}}",
+									"description": "S/N of Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADE Placeholders",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/dep",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"dep"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update ADE Placeholder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deviceName\": \"MyiPad\",\n    \"userId\": 6,\n    \"groupIds\": [\n        12,\n        2\n    ],\n    \"profileId\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/dep/:serial",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"dep",
+								":serial"
+							],
+							"variable": [
+								{
+									"key": "serial",
+									"value": null,
+									"description": "S/N of the device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Devices to ADE Profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"placeholderSerialNumbers\": [\n        \"0100ABC\",\n        \"0200DEF\"\n    ],\n    \"profileId\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/dep/placeholders/profile",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"dep",
+								"placeholders",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Classes",
+			"item": [
+				{
+					"name": "Unassign Teachers/Students",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid",
+								"users"
+							],
+							"query": [
+								{
+									"key": "students",
+									"value": "67,90,4",
+									"description": "Remove single students (user ID)",
+									"disabled": true
+								},
+								{
+									"key": "students",
+									"value": "all",
+									"description": "Remove all students",
+									"disabled": true
+								},
+								{
+									"key": "teachers",
+									"value": "4,28,63",
+									"description": "Remove single teachers (user ID)",
+									"disabled": true
+								},
+								{
+									"key": "teachers",
+									"value": "all",
+									"description": "Remove all students",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Assign Users To Class",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"students\": [\n        1, \n        25, \n        98],\n    \"teachers\": [\n        123, \n        65\n        ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid",
+								"users"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create A Class",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"MyClass\",\n    \"description\": \"This is my class\",\n    \"locationId\": 0,\n    \"students\": [\n        34,\n        73,\n        2\n    ],\n    \"teachers\": [\n        67,\n        3\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/classes",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Class",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find a Class",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Class List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Devices of a Class",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid/devices",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid",
+								"devices"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Class",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/classes/:uuid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"classes",
+								":uuid"
+							],
+							"variable": [
+								{
+									"key": "uuid",
+									"value": "{{classUUID}}",
+									"description": "uuid of Class"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device Groups",
+			"item": [
+				{
+					"name": "Add Devices to Device Group (STATIC ONLY)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"groupId\": 3,\n    \"udids\": [\n        \"0100ABC\",\n        \"0200DEF\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/groups/add",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Static Device Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Static Group\",\n    \"locationId\": 0,\n    \"description\": \"\",\n    \"information\":\"\",\n    \"collectionType\":\"none\",\n    \"shared\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/groups",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Device Group",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device Group Detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/devices/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Device Groups",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/groups",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Devices from Device Group (STATIC ONLY)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"groupId\": 3,\n    \"udids\": [\n        \"0100ABC\",\n        \"0200DEF\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/groups/remove",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups",
+								"remove"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Updated API Group V2\",\n    \"description\": \"Updated Description\",\n    \"shared\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Device",
+			"item": [
+				{
+					"name": "Assign new owner",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/owner",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"owner"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "The ID of the user that will become the owner of the device. Provide a 0 as value to remove the current owner from the device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Clear Activation Lock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/activationlock/clear",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"activationlock",
+								"clear"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "The UDID of the device to clear the activation lock"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device Apps Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/apps",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"apps"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": null,
+									"description": "UDID of device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Device Details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid"
+							],
+							"query": [
+								{
+									"key": "includeApps",
+									"value": "true",
+									"description": "Optional: Boolean",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Devices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/devices",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices"
+							],
+							"query": [
+								{
+									"key": "includeApps",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								},
+								{
+									"key": "inTrash",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								},
+								{
+									"key": "hasOwner",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								},
+								{
+									"key": "owner",
+									"value": "",
+									"description": "Optional: Filter by UserID",
+									"disabled": true
+								},
+								{
+									"key": "manged",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								},
+								{
+									"key": "Supervised",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								},
+								{
+									"key": "groups",
+									"value": "",
+									"description": "Optional: Filter by Group ID with Comma (1,4,54)",
+									"disabled": true
+								},
+								{
+									"key": "ownergroups",
+									"value": "",
+									"description": "Optional: Filter by userGroup ID with Comma (1,5,8)",
+									"disabled": true
+								},
+								{
+									"key": "serialnumber",
+									"value": "",
+									"description": "Optional: Filter by S/N",
+									"disabled": true
+								},
+								{
+									"key": "model",
+									"value": "",
+									"description": "Optional: model indentifier (ie iPad3,4)",
+									"disabled": true
+								},
+								{
+									"key": "location",
+									"value": "",
+									"description": "Optional: Filter by location ID",
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "",
+									"description": "Optional: Filter by owner name",
+									"disabled": true
+								},
+								{
+									"key": "assettag",
+									"value": "",
+									"description": "Optional: Filter by asset tag",
+									"disabled": true
+								},
+								{
+									"key": "enrollType",
+									"value": "",
+									"description": "Optional: Filter by type of enrollment. Options are: manual, depPending, ac2Pending, dep and ac2",
+									"disabled": true
+								},
+								{
+									"key": "bootstrapTokenStored",
+									"value": "",
+									"description": "Optional: Boolean",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move A Device",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locationId\": 0,\n    \"onlyDevice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:id/migrate",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":id",
+								"migrate"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Device UDID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move Group of Devices",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"udids\": [\n        \"01001\",\n        \"02002\"\n    ],\n    \"onlyDevice\": \"true\",\n    \"locationId\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/migrate",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								"migrate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Refresh A Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/refresh",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"refresh"
+							],
+							"query": [
+								{
+									"key": "clearErrors",
+									"value": "true",
+									"description": "When set to true, it clears all installation failures such that apps get reinstalled when failed previously.\n\nDefault value: false",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of the Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restart A Device",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "clearErrors",
+									"value": "true",
+									"description": "optional - Bool, default False - When set to true, it clears all installation failures such that apps get reinstalled when failed previously.",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/restart",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"restart"
+							],
+							"query": [
+								{
+									"key": "clearPasscode",
+									"value": "true",
+									"description": "true or false to indicate if the passcode should be cleared first",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore A Device (From Trash)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/restore",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Trash A Device",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unenroll Device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "test",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/unenroll",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"unenroll"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Device Details",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"assetTag\": \"New Asset Tag\",\n    \"notes\": \"A note about this device\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/details",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"details"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update eSIM Plan",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"serverUrl\": \"www.somecarrier.com\",\n    \"requresNetworkTether\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/cellularPlan",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"cellularPlan"
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of Device"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wipe A Device",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "",
+								"description": "1",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "clearErrors",
+									"value": "true",
+									"description": "optional - Bool, default False - When set to true, it clears all installation failures such that apps get reinstalled when failed previously.",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseurl}}/devices/:udid/wipe",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"devices",
+								":udid",
+								"wipe"
+							],
+							"query": [
+								{
+									"key": "clearActivationLock",
+									"value": "true",
+									"description": "true of false to indicate if the activation lock should be cleared first",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "udid",
+									"value": "",
+									"description": "UDID of Device"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Group\",\n    \"description\": \"This Group Contains Users\",\n    \"locationID\": 0,\n    \"acl\": {\n        \"teacher\": \"deny\",\n        \"parent\": \"deny\",\n        \"selfService\": \"allow\",\n        \"selfServiceInfo\": \"allow\",\n        \"selfServiceLocation\": \"inherit\",\n        \"selfServiceClearPasscode\": \"deny\",\n        \"selfServiceLock\": \"deny\",\n        \"selfServiceWipe\": \"deny\",\n        \"selfServiceUnenroll\": \"inherit\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/groups",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Group",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Group Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Groups",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/users/groups",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Group",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My Group\",\n    \"description\": \"This Group Contains Users\",\n    \"acl\": {\n        \"teacher\": \"deny\",\n        \"parent\": \"deny\",\n        \"selfService\": \"allow\",\n        \"selfServiceInfo\": \"allow\",\n        \"selfServiceLocation\": \"inherit\",\n        \"selfServiceClearPasscode\": \"deny\",\n        \"selfServiceLock\": \"deny\",\n        \"selfServiceWipe\": \"deny\",\n        \"selfServiceUnenroll\": \"inherit\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/groups/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"groups",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "Group ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locations",
+			"item": [
+				{
+					"name": "Get List of Locations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/locations",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Location Information",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/locations/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"locations",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "location ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parent",
+			"item": [
+				{
+					"name": "Remove Parent Restrictions",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/parent/restrictions?token={{Token}}&deviceUDID=",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"parent",
+								"restrictions"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"description": "Token obtained by the POST teacher/authenticate call"
+								},
+								{
+									"key": "deviceUDID",
+									"value": "",
+									"description": "Device UDID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Profiles",
+			"item": [
+				{
+					"name": "Get A List Of Profiles",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/profiles",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"profiles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile Information",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/profiles/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"profiles",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "5",
+									"description": "Id of Profile"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teacher",
+			"item": [
+				{
+					"name": "Teacher - App Request",
+					"item": [
+						{
+							"name": "App Request - Get App Request Details",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/requests/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"requests",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "ID of App Request"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Request - Get App Request List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/requests?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"requests"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Request - Request App",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"appAdamId\": 718509958,\n    \"studentIds\": 556 ,\n    \"groupId\": 4,\n    \"motivation\": \"I need this app becuase\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/requests?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"requests"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Request - Update Request App",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"studentIds\": 556 ,\n    \"groupId\": 4,\n    \"motivation\": \"This is an update request\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/requests/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"requests",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Request - Delete Request",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/requests/:id",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"requests",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "Request Identifier"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Teacher - Install App",
+					"item": [
+						{
+							"name": "App Install - Delete Installed Media",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/installed/:udid/:mediaId?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"installed",
+										":udid",
+										":mediaId"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"description": "Token obtained by the POST teacher/authenticate call"
+										}
+									],
+									"variable": [
+										{
+											"key": "udid",
+											"value": null,
+											"description": "UDID of device (if no device is given it will remove it all for that media)"
+										},
+										{
+											"key": "mediaId",
+											"value": null,
+											"description": "(Optional) If not specified it will remove all the medias from the given device"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Install - Install App for Students",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"1,3,5\",\n    \"indentifier\": \"com.app.install\",\n    \"id\": 4,\n    \"type\": \"vpp\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/install?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"install"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"description": "Token obtained by the POST teacher/authenticate call"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Install - List Appstore apps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"term\": \"Jamf\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/appstore?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"appstore"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"description": "Token obtained by the POST teacher/authenticate call"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Install - List VPP Apps",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/vpp?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"vpp"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"description": "Token obtained by the POST teacher/authenticate call"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "App Install - List installed Apps (by Teacher)",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apps/installed/:udid?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apps",
+										"installed",
+										":udid"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}",
+											"description": "Token obtained by the POST teacher/authenticate call"
+										}
+									],
+									"variable": [
+										{
+											"key": "udid",
+											"value": null,
+											"description": "(optional) UDID of device"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Teacher - Classes",
+					"item": [
+						{
+							"name": "Get Class List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/groups?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"groups"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Class Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/groups/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"groups",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "Class ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Class Groups",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/groups/:id/custom?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"groups",
+										":id",
+										"custom"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "",
+											"description": "Class Id"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Ad Hoc Class",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"class\":2023,\n    \"name\": \"API Created Class\",\n    \"members\": [59,3]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/group/create?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"group",
+										"create"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modify Class",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"API Created Class\",\n    \"members\": [59,3]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/group/modify/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"group",
+										"modify",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "ID of Class"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Class",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/group/:id",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"group",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "ID of the group to be removed"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Teacher Lessons",
+					"item": [
+						{
+							"name": "Lessons - Create Lesson",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"My API Lesson\",\n    \"description\": \"Created by API\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/create?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"create"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Save Settings",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"applock\": \"com.apple.mobilesafari, com.jamf.student\",\n    \"materials\": {\n        \"sites\": { \"title\": \"Jamf\", \"URL\" : \"jamf.com\"},\n        \"weblock\": true,\n        \"lockInSafari\": false\n    }\n    \"allowCamera\": true,\n    \"allowAppstore\": false,\n    \"allowChat\": false,\n    \"allowGamecenter\": false,\n    \"allowNotifications\": true,\n    \"allowSafari\": true,\n    \"allowScreenshots\": true,\n    \"allowSpellcheck\": true,\n    \"allowiTunes\": false,\n    \"genres\": \"games,entertainment,social\",\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/save/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"save",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "102",
+											"description": "ID of Lesson"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Share",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/share/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"share",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "102",
+											"description": "ID of lesson"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Start",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"1,4,67\",\n    \"clearAfter\": 60\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/start/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"start",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "102",
+											"description": "ID of lesson"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Stop",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/stop?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"stop"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Update a Lesson",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": " {\n      \"name\": \"Math Lesson\",\n      \"colorId\": 1,\n      \"description\": \"This is a lesson for math\",\n      \"appWhitelist\": [],\n      \"lockInSafari\":false,\n      \"weblock\":false,\n      \"links\":[\n          {\n              \"url\":\"apple.com\",\n              \"title\":\"Apple\"\n          }\n      ],\n      \"restrictedFunctionality\":[\n          \"camera\"\n      ],\n      \"restrictedGenres\":[\n          \"games\"\n      ]\n }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "102",
+											"description": "ID of class"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Delete Lesson",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "Lesson ID"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Disable Lesson",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/disable/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"disable",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null,
+											"description": "ID of class"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - List Lessons",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Lessons - Get Lesson Details",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "3",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/:id?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										":id"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "102"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Ad Hoc Actions",
+					"item": [
+						{
+							"name": "Ad Hoc - Clear Passcode",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"34, 56\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/clearPasscode?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"clearPasscode"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ad Hoc - List Available Apps",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseurl}}/teacher/lessons/apps?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"lessons",
+										"apps"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ad Hoc - Set Attention Message",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"549, 40\",\n    \"message\": \"message to go away in 60 seconds\",\n    \"clearAfter\": 60\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apply/attention?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apply",
+										"attention"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ad Hoc - Set Weblock",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\":\"549\",\n    \"websites\": \"jamf.com,bbc.co.uk\",\n    \"lockInSafari\": false,\n    \"clearAfter\": 60\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apply/weblock?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apply",
+										"weblock"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ad Hoc - Set Restrictions",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"549, 58, 23\",\n    \"allowCamera\": true,\n    \"allowAppstore\": false,\n    \"allowChat\": false,\n    \"allowGamecenter\": false,\n    \"allowNotifications\": true,\n    \"allowSafari\": true,\n    \"allowScreenshots\": true,\n    \"allowSpellcheck\": true,\n    \"allowiTunes\": false,\n    \"genres\": \"games,entertainment,social\",\n    \"clearAfter\": 60\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/apply/restrictions?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"apply",
+										"restrictions"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ad Hoc - Bluetooth - On / Off",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Server-Protocol-Version",
+										"value": "2",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"students\": \"60, 598\",\n    \"status\": \"on\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseurl}}/teacher/setBluetoothf?token={{Token}}",
+									"host": [
+										"{{baseurl}}"
+									],
+									"path": [
+										"teacher",
+										"setBluetoothf"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "{{Token}}"
+										},
+										{
+											"key": "id",
+											"value": "558",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Authenicate",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"a.user\",\n    \"password\": \"password\",\n    \"company\": \"{{CompanyID}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/teacher/authenticate",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Company",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"filter\":\"Darlow\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/teacher/companies",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"companies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Task Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tasks\":1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/teacher/lessons/status?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"lessons",
+								"status"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photo - Remove",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/teacher/removePhoto/:id?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"removePhoto",
+								":id"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "ID of Student"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Photo - Upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"photo\": my/file/upload\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/teacher/removePhoto/:id?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"removePhoto",
+								":id"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "ID of Student"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Settings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/teacher/settings?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"settings"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Terminate Session",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/teacher/logoff?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"logoff"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								},
+								{
+									"key": "id",
+									"value": "558",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "2",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/teacher/validate?token={{Token}}",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"teacher",
+								"validate"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "{{Token}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "(Re)Set Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"NewPassword\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/:id/password",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"password"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"users\": {\n        \"username\": \"NewUser\",\n        \"firstName\": \"First\",\n        \"lastName\": \"Last\",\n        \"password\": \"MyPassword\",\n        \"email\": \"myemail@sch.co\",\n        \"memberOf\": [\n            \"Group1\",\n            \"Group2\"\n        ]\n    },\n    {\n        \"username\": \"TeacherInfo\",\n        \"firstName\": \"Mrs\",\n        \"lastName\": \"Teacher\",\n        \"password\": \"MyPassword\",\n        \"email\": \"teacher@sch.co\",\n        \"memberOf\": [\n            \"Teachers\"\n        ],\n        \"teacher\": [\n            2,\n            5\n        ]\n    },\n    {\n        \"username\": \"ParentInfo\",\n        \"firstName\": \"Mr\",\n        \"lastName\": \"Parent\",\n        \"password\": \"MyPassword\",\n        \"email\": \"parent@sch.co\",\n        \"memberOf\": [\n            \"Parents\"\n        ],\n        \"children\": [\n            67\n        ]\n    },\n    {\n        \"username\": \"DeleteUser\",\n        \"action\": \"delete\"\n    },\n    {\n        \"username\": \"OptionalUserInfo\",\n        \"firstName\": \"Optional\",\n        \"lastName\": \"Info\",\n        \"password\": \"MyPassword\",\n        \"email\": \"myemail@sch.co\",\n        \"storePassword\": true,\n        \"domain\": \"myschool.com\",\n        \"notes\": \"my notes here\",\n        \"exclude\": true,\n        \"locationId\": \"0\",\n        \"storePassword\": false,\n        \"domain\": \"my.domain\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/bulk",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								"bulk"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"NewUser\",\n    \"firstName\": \"New\",\n    \"lastName\": \"User\",\n    \"password\": \"MyPassword\",\n    \"email\": \"newuser@myemail.sch.co\",\n    \"memberOf\": [\n        \"Class1\",\n        \"Class2\"\n    ],\n    \"locationId\": \"0\",\n    \"notes\": \"This is a note\",\n    \"storePassword\": true,\n    \"domain\": \"myschool.com\",\n    \"exclude\": true,\n    \"teacher\": [\n        1,\n        3\n    ],\n    \"children\": [\n        \"57\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/users/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/users",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "hasDevice",
+									"value": "true",
+									"description": "Boolean",
+									"disabled": true
+								},
+								{
+									"key": "memberOf",
+									"value": "",
+									"description": "Filter by group Id with comma (1,5,34)",
+									"disabled": true
+								},
+								{
+									"key": "locationId",
+									"value": "3",
+									"description": "Filter by location ID",
+									"disabled": true
+								},
+								{
+									"key": "inTrash",
+									"value": "true",
+									"description": "Boolean",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Move A User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"locationId\": 0,\n    \"onlyDevice\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/:id/migrate",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"migrate"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "ID of User"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"NewUser\",\n    \"firstName\": \"New\",\n    \"lastName\": \"User\",\n    \"password\": \"MyPassword\",\n    \"email\": \"newuser@myemail.sch.co\",\n    \"memberOf\": [\n        \"Class1\",\n        \"Class2\"\n    ],\n    \"locationId\": \"0\",\n    \"notes\": \"This is a note\",\n    \"storePassword\": true,\n    \"domain\": \"myschool.com\",\n    \"exclude\": true,\n    \"teacher\": [\n        1,\n        3\n    ],\n    \"children\": [\n        \"57\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/users/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single User Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/users/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Volume Purchasing",
+			"item": [
+				{
+					"name": "Retire User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/vpp/retire/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"vpp",
+								"retire",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invite User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseurl}}/vpp/invite/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"vpp",
+								"invite",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "User ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "iBeacons",
+			"item": [
+				{
+					"name": "Create iBeacon",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My iBeacon\",\n    \"description\": \"new iBeacon\",\n    \"UUID\": \"string\",\n    \"major\":0,\n    \"minor\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/ibeacons",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"ibeacons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete iBeacon",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/ibeacons/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"ibeacons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "ID of iBeacon"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get iBeacon Detail",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/ibeacons/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"ibeacons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "ID of iBeacon"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List iBeacons",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseurl}}/ibeacons",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"ibeacons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update iBeacon",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "X-Server-Protocol-Version",
+								"value": "3",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"My iBeacon\",\n    \"description\": \"new iBeacon\",\n    \"UUID\": \"string\",\n    \"major\":0,\n    \"minor\":0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseurl}}/ibeacons/:id",
+							"host": [
+								"{{baseurl}}"
+							],
+							"path": [
+								"ibeacons",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null,
+									"description": "iBeacon ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "password",
+				"value": "{{password}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{username}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

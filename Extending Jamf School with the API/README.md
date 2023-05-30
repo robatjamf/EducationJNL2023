@@ -15,5 +15,6 @@
 
 Download Postman for free [here](https://www.postman.com)
 
-Add the **Jamf School API Postman Collection**
+### Add the **Jamf School API Postman Collection**
 
+[Download Jamf School API.postman_collection.json](Jamf School API.postman_collection.json)
