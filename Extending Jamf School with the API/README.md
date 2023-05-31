@@ -3,11 +3,12 @@
 ### London, RheinMain, Paris & Amsterdam 
 
 ---
+<img width="45" height="45" src="https://img.icons8.com/stickers/100/book-1.png" alt="book-1"/>
 
-## Documentation Links
+### Documentation Links
 
-[Jamf Pro Developer](https://developer.jamf.com)
-[Jamf School API Documentation](https://school.jamfcloud.com/api/docs/)
+- [Jamf Pro Developer](https://developer.jamf.com)
+- [Jamf School API Documentation](https://school.jamfcloud.com/api/docs/)
 
 ---
 
