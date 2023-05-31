@@ -8,10 +8,10 @@
 
 # Education @ JNL
 
-### [Securing Apple Devices in Education: Peeling back the Layers]()
+### [➡️Securing Apple Devices in Education: Peeling back the Layers]()
 
-### [Jamf & Microsoft: Safe Internet & SSO Extension]()
+### [➡️Jamf & Microsoft: Safe Internet & SSO Extension]()
 
-### [Using Jamf Teacher & Parent for more than learning](https://github.com/robatjamf/EducationJNL2023/tree/main/Using%20Jamf%20Teacher%20Parent)
+### [➡️Using Jamf Teacher & Parent for more than learning](https://github.com/robatjamf/EducationJNL2023/tree/main/Using%20Jamf%20Teacher%20Parent)
 
-### [Extending Jamf School with the API]()
+### [➡️Extending Jamf School with the API]()
