@@ -4,7 +4,7 @@
 
 ---
 
-<img width="100" height="100" src="https://img.icons8.com/stickers/100/book-1.png" alt="book-1"/>
+<img width="45" height="45" src="https://img.icons8.com/stickers/100/book-1.png" alt="book-1"/>
 
 ### Resources & Links
 
