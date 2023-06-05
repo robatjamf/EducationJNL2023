@@ -5,20 +5,22 @@
 
 ### London, RheinMain, Paris & Amsterdam
 
----
+## 🔐 Security
 
-[Apple Security Platform][2]
+- [Apple Security Platform][2]
+- [Keeping Students Safe and Secure - Beyond Device-Level Security | JNUC 2022 📹 ][3]
 
-[Keeping Students Safe and Secure - Beyond Device-Level Security | JNUC 2022][3]
+
+## 🤔 Jamf Training Catalogue 
+- [Profiles for Jamf School][4]
 
 
-[Profiles for Jamf School][4]
 
-[Jamf Protect Deployment with Jamf School][5]
+## 📓 Documentation
 
-[Jamf Safe Internet Integration with Jamf School][6]
-
-[Jamf Safe Internet Documentation][7]
+- [Jamf Protect Deployment with Jamf School][5]
+- [Jamf Safe Internet Integration with Jamf School][6]
+- [Jamf Safe Internet Documentation][7]
 
 
 [1]:	https://github.com/robatjamf/EducationJNL2023/tree/main
